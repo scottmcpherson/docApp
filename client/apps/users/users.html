@@ -1,0 +1,27 @@
+<template name="users">
+	<div class="page">
+		<h1>Users</h1>
+		{{#each projectUsers}}
+			{{>user}}		
+		{{/each}}
+		<hr>
+		<h3>Add Users to this Project</h3>
+		<ul class="list-unstyled add-users">			
+		{{#each users}}
+			{{>nonUser}}
+		{{/each}}
+		</ul>
+	</div>
+</template>
+
+<template name="user">
+	<p>{{getEmail this}}</p>
+	
+</template>
+
+<template name="nonUser">
+	<li class="clearfix">
+		<p class="pull-left">{{getEmail this}}</p>
+		<button type="button" class="btn btn-primary pull-right btn-sm addUser"><span class="glyphicon glyphicon-plus"></span></button>
+	</li>
+</template>

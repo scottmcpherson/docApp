@@ -1,0 +1,105 @@
+<head>
+	<title>docApp</title>
+</head>
+
+<body>
+	
+</body>
+
+
+<template name="layout">
+
+	<div class="navbar navbar-fixed-top">
+
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+			
+			<a class="navbar-brand" href="#">Doc App</a>
+			
+		</div>
+		<div class="navbar-collapse collapse" style="height: 1px;">
+			
+			<ul class="nav navbar-nav navbar-right">
+				
+				{{ loginButtons }}
+			
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+
+	
+	<div class="main-container">
+
+		<nav class="left-nav {{slideLeft}}">
+			<ul>
+				<li><a href="{{pathFor 'projects'}}" id="home"><span class="glyphicon glyphicon-home"></span><br>Home</a></li>
+				<li><a href="#" id="docs"><span class="glyphicon {{ docIcon }}"></span><br>Docs</a></li>
+				<li><a href="#" id="forms"><span class="glyphicon glyphicon-list-alt"></span><br>Forms</a></li>
+				<li><a href="#" id="messages"><span class="badge">{{unreadMessages}}</span><span class="glyphicon glyphicon-comment"></span><br>Messages</a></li>
+				<li><a href="{{makePath 'users'}}" id="users"><span class="glyphicon glyphicon-user"></span><br>Users</a></li>
+				<li><a href="#" id="settings"><span class="glyphicon glyphicon-wrench"></span><br>Settings</a></li>
+			</ul>
+		</nav>
+
+		<div class="sub-nav {{subNavShow}} {{slideLeft}}">
+			<div class="nav-buttons clearfix">
+				<button type="button" class="show-nav btn btn-default btn-sm pull-left {{ isSubActive }}">Nav</button>
+				<button type="button" class="add-form btn btn-default btn-sm pull-right {{ isForms }}">
+					<span class="glyphicon glyphicon-plus"></span> 
+				</button>
+			</div>
+			
+			<ul id="list-forms">
+				{{#each forms}}
+					{{#if showDocs}}
+						<li><a href="{{makePath 'docs' this}}">{{name}}</a></li>
+					{{else}}
+						<li><a href="{{makePath 'forms' this}}">{{name}}</a></li>
+					{{/if}}
+				{{/each}}
+			</ul>
+
+		</div>
+		
+		<div class="page-container {{slideRight}}">	
+			{{yield}}
+		</div>
+
+		<div class="smart-bar">
+			<div class="users">
+				{{>smartBar}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="smartBar">
+	<ul class="list-unstyled">	
+		{{#each smartBarUsers}}
+			{{>smartBarUser}}
+		{{/each}}
+		<li class="clearfix">
+			<div class="draggableUsers pull-left" data-id="group">
+				<img src="/images/group.jpg" width="28" height="28">
+			</div>
+			<p class="pull-left"><a href="#">All Users</a></p>
+		</li>
+	</ul>			
+</template>
+
+<template name="smartBarUser">
+	<li class="clearfix">
+		<div class="draggableUsers pull-left" data-id="{{_id}}">
+			<img src="/images/{{profile.username}}.jpg" width="28" height="28">
+		</div>
+		<p class="pull-left"><a href="#">{{profile.fullName}}</a></p>
+		<span class="pull-right status {{isUserOnline profile.online}}"></span>
+	</li>
+</template>
+
+
+

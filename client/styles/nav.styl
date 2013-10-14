@@ -1,0 +1,70 @@
+.navbar, .navbar-collapse
+	background-color #fff 
+	.navbar-brand
+		text-shadow none
+		color #37485D 
+// .navbar-center
+// 	position absolute
+// 	width 278px
+// 	margin-left 40%
+.left-nav 
+	width 100px
+	position fixed
+	background-color #3375AE
+	bottom 0
+	top 50px
+	transition 1s
+
+	ul	
+		list-style: none
+		padding-left 0
+		text-align center
+		margin-top 30px
+		li
+			position relative 
+
+			.badge
+				position absolute
+				z-index 3
+				right 20px 
+				top 15px
+			padding 20px 0
+
+			.bs-glyphicons, .glyphicon 
+				font-size 24px
+				color #fff
+
+			a
+				color #fff
+				display block
+.sub-nav 
+	position fixed
+	top 50px
+	bottom 0
+	left 100px
+	background-color #fff
+	width 160px
+	transition 1s
+	z-index 1
+	.nav-buttons
+		padding 10px
+		height 50px
+	 
+	ul
+		list-style none
+		padding-left 0
+		text-align center
+		margin-top 20px
+		
+		li 
+			padding 20px 0
+			a
+				display block
+.nav > li > a:hover, .nav > li > a:focus
+	background-color transparent
+nav.slide-left 
+	transition 1s
+	left -100px
+div.slide-left
+	transition 1s
+	left 0

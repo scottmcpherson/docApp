@@ -1,0 +1,39 @@
+<template name="listDocs">
+	<div class="page">	
+			{{#with form}}
+				<div class="page-header">
+					<h1>{{name}}</h1>
+					{{#if isAdmin}}
+						<a href="{{pathFor 'createDoc'}}" class="new btn btn-primary">New Doc</a>
+					{{/if}}
+				</div>		
+			{{/with}}
+			<table class="table">
+				<thead>
+					<tr>
+						{{#each formFields}}
+							<th>{{label}}</th>
+						{{/each}}	
+							<th>Actions</th>				
+					</tr>
+				</thead>
+				
+
+				<tbody>
+					{{#each docs}}
+						<tr>
+							{{#sortDocFields docFields}}
+								<td>
+									{{value}}	
+								</td>
+							{{/sortDocFields}}
+
+							<td><a href="{{makePath 'doc' this}}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+						</tr>
+					{{/each}}
+				</tbody>
+			 	
+			</table>
+				
+	</div>
+</template>

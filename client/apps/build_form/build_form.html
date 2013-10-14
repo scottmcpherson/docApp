@@ -1,0 +1,35 @@
+<template name="buildForm">
+	
+		{{> dragElements}}
+		{{> formFields}}
+	
+</template>
+
+<template name="dragElements">
+	<div class="draggable-row">
+		<div class="form-draggables clearfix">
+			<div class="draggable-container"><div class="draggable new-item"><img id="text" src="/images/text.png"></div><span>Text</span></div>
+			<div class="draggable-container"><div class="draggable new-item"><img id="textarea" src="/images/textarea.png"></div><span>TextArea</span></div>
+			<div class="draggable-container"><div class="draggable new-item"><img id="date" src="/images/date.png"></div><span>Date</span></div>
+		</ul>
+	</div>
+</template>
+
+<template name="formFields">
+		<div class="page build-page">
+			<div class="build-header">
+				{{#with form}}
+					<h1>{{name}}</h1>
+				{{/with}}
+			</div>
+			
+
+			<div id="sortable">
+				{{#each fields}}
+					{{>field}}
+				{{else}}
+			
+				{{/each}}
+			</div>
+		</div>
+</template>

@@ -1,0 +1,14 @@
+<template name="listForms">
+	<div class="container">
+		<a href="#" id="newForm">New Form</a>
+		<ul id="listForms">
+			{{#each forms}}
+				{{> form}}
+			{{/each}}
+		</ul>
+	</div>	
+</template>
+
+<template name="form">
+	<li><a href="{{pathFor 'buildForm'}}">{{name}}</a></li>
+</template>

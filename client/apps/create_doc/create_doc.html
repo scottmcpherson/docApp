@@ -1,0 +1,21 @@
+<template name="createDoc">
+
+	<div class="page">		
+	   <form id="addDoc">
+			{{#with form}}
+				<h1>{{name}}</h1>
+			{{/with}}
+
+			{{#each fields}}
+				{{>docForm}}
+			{{else}}	
+				<h1>No Docs Found</h1>
+			{{/each}}
+			<button type="submit" class="btn btn-default">Submit</button>
+		<form>
+	</div>
+	
+</template>
+<template name="docForm">
+	{{formatDocFields this}}	
+</template>

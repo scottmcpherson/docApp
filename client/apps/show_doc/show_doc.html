@@ -1,0 +1,93 @@
+<template name="showDoc">
+	{{#if showCommentsDialog}}
+		{{> commentsDialog}}
+	{{/if}}
+	{{#if showMessageDialog}}
+		{{> messageDialog}}
+	{{/if}}
+	<div class="page" id="droppable">	
+
+		{{#with doc}}
+			<button type="button" class="show-comments btn btn-default btn-lg">
+			   <span class="glyphicon glyphicon-list"></span> 
+			</button>
+
+			<div class="page-header">
+				<h3>{{ formName }}</h3>	
+			</div>
+			
+			{{#sortDocFields docFields}}
+				<h4>{{label}}: </h4>
+				<p class="lead">{{value}}</p>
+			{{/sortDocFields}}
+		{{/with}}	
+	</div>
+</template>
+
+<template name="commentsDialog">
+	<div class="modal-backdrop"></div>
+	<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close close-comments" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Activity</h4>
+				</div>
+				<div class="modal-body clearfix">
+					{{#each activity}}
+						<div class="media" id="{{_id}}">
+							<img src="/images/{{username}}.jpg" class="pull-left">
+							<div class="media-body">		
+								<p>{{comment}}</p>
+							</div>
+						</div>
+					{{/each}}	
+					{{#with loggedInUser}}
+						<div class="media">
+							<img src="/images/{{profile.username}}.jpg" class="pull-left">
+							<div class="media-body">		
+								<textarea class="form-control" id="comment" rows="2" placeholder="add comment"></textarea>
+								<button type="submit" class="btn btn-default submitComment">Comment</button>
+							</div>
+						</div>
+					{{/with}}
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+</template>
+
+<template name="messageDialog">
+	
+	<div class="modal fade in" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: block;">
+		<div class="modal-dialog message-modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close-message close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Message</h4>
+				</div>
+				
+				
+				<div class="modal-body clearfix">	
+					<div class="to">
+						<p class="pull-left">To</p>
+						<ul id="myTags"></ul>
+					</div>
+					{{#with loggedInUser}}
+						<p class="from">From <span>{{profile.fullName}}<span></p>
+					{{/with}}
+					<p class="message-label">Message</p>
+					<textarea class="form-control" rows="3" id="message" class="form-control"></textarea>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary pull-left send-message">Send</button>
+					<button type="button" class="btn btn-default close-message pull-left">Cancel</button>	
+	         </div>
+				
+				
+			
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+</template>
