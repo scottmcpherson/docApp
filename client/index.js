@@ -13,13 +13,10 @@ Deps.autorun(function() {
 		userId: Meteor.userId()
 	}, function(error, userRoles) {
 		if(! error)
-			console.log(userRoles);
 			_.each(userRoles, function(val, name){
-				// Handlebars.registerHelper(name, function(){ return val; });
 				Session.set(name, val);
 			});	
 	});
-	console.log("updates made");
 });
 Handlebars.registerHelper("isAdmin", function(){ return Session.get("isAdmin"); });
 Handlebars.registerHelper("canWrite", function(){ return Session.get("canWrite"); });
@@ -102,7 +99,6 @@ Template.layout.helpers({
    	if (Meteor.user()) {
    		var user = Meteor.user()
 	   	var email = user.emails[0].address
-	   	console.log(email);
 	   	var count = Messages.find({ projectId: Session.get("currentProjectId"), read: false, to: email }).count();
 	   	if (count > 0)
 	   		return Messages.find({ projectId: Session.get("currentProjectId"), read: false, to: email }).count();
@@ -127,11 +123,7 @@ Template.smartBar.rendered = function() {
 	});
 	$("#example").popover();
 }
-Template.smartBar.events({
-	'click .draggableUsers': function(e) {
-		console.log("user clicked");
-	} 
-});
+
 
 Template.layout.events({
 	"click .left-nav ul li a": function(e) {
