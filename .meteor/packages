@@ -6,7 +6,6 @@
 standard-app-packages
 preserve-inputs
 stylus
-iron-router
 bootstrap-3
 transit
 accounts-password
@@ -15,3 +14,4 @@ user-status
 jquery
 jquery-ui
 email
+iron-router
