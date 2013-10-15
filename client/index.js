@@ -140,11 +140,25 @@ Template.layout.events({
 	},
 	"click .sub-nav ul li a": function(e) {
 
-		Session.set("subNavActive", true);
+		// Session.set("subNavActive", true);
 			
 	},
 	"click .show-nav" : function(e) {
-		Session.set("subNavActive", false);
+
+		if(! $('.sub-nav').hasClass('left')) {
+			$('.left-nav').transition({x: -50}, 400);
+			$('.sub-nav').transition({x: -100}, 300, function() {
+				$(this).addClass('left');
+			});
+			$('.page-container').transition({x: -50}, 300);
+		} else {
+			$('.sub-nav').transition({x: 0}, 300, function() {
+				$(this).removeClass('left');
+			});
+			$('.left-nav').transition({x: 0}, 300);
+			$('.page-container').transition({x: 0}, 300);
+		}
+		// Session.set("subNavActive", false);
 	},
 	"click .add-form" : function(e) {
 		// e.preventDefault();
