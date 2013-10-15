@@ -19,6 +19,7 @@ Deps.autorun(function() {
 				Session.set(name, val);
 			});	
 	});
+	console.log("updates made");
 });
 Handlebars.registerHelper("isAdmin", function(){ return Session.get("isAdmin"); });
 Handlebars.registerHelper("canWrite", function(){ return Session.get("canWrite"); });
