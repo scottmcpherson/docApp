@@ -86,6 +86,7 @@ Router.map(function() {
 		before: function() {
 			if(Meteor.userId() === null)
 				this.redirect('/');
+			Session.set("showComments", false);
 		},
 		after: function() {
 			Session.set("currentDocId", this.params.docId)
