@@ -35,12 +35,15 @@ Template.commentsDialog.events({
 		var comment = template.find('#comment').value;
 		var docId = Session.get("currentDocId");
 		var mentions = comment.match(/@[\w]+/g) || [];
-		
+		var wholeFrag = Router.current().path.substr(1);
+		var frag = wholeFrag.slice(-2) == "/a" ?  wholeFrag : wholeFrag + "/a";
+	
 		Meteor.call('addActivity', {
 			docId: docId,
 			comment: comment,
 			mentions: mentions,
-			projectId: Session.get("currentProjectId")
+			projectId: Session.get("currentProjectId"),
+			frag: frag
 		});
 		template.find('#comment').value = "";
 	}

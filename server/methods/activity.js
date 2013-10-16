@@ -15,6 +15,8 @@ Meteor.methods({
 		var name = user.profile.fullName || "anonymous";
 		var from = user.emails[0].address;
 		var username = user.profile.username;
+		var url = Meteor.absoluteUrl() + options.frag
+		console.log(url);
 		Activity.insert({
 			author: name,
 			username: username,
@@ -39,7 +41,7 @@ Meteor.methods({
 								to: emails,
 								replyTo: from || undefined,
 								subject: from + " mentioned you.",
-								text: from + " mentioned you on doc app"
+								text: from + " mentioned you on the doc app: " + url
 							});
 						}
 					});

@@ -97,6 +97,25 @@ Router.map(function() {
 			};
 		}
 	});
+	this.route('showDocModal', {
+		path: 'projects/:_id/doc/:docId/a',
+		template: 'showDoc',
+		before: function() {
+			if(Meteor.userId() === null)
+				this.redirect('/');
+			Session.set("showComments", true)
+		},
+		after: function() {
+			Session.set("currentDocId", this.params.docId)
+		},
+		data: function() {
+			return {
+				doc: Docs.findOne({ _id: this.params.docId }),
+				activity: Activity.find({ docId: this.params.docId })
+			};
+		}
+
+	})
 	this.route('users', {
 		path: 'projects/:_id/users',
 		before: function() {
