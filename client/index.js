@@ -114,7 +114,6 @@ Template.smartBar.helpers({
    }
 });
 Template.smartBar.rendered = function() {
-	console.log("updated message in smartbar");
 	$('.draggableUsers').draggable({
 		revert: true,
 		cursor: "move"
