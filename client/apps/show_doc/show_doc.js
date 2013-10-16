@@ -24,10 +24,12 @@ function getUsernames() {
 	});
 	return usernames;
 }
-
+var getPath = function(){
+	return Router.current().path;
+}
 Template.showDoc.events({
-	'click .show-comments': function(e) { Session.set("showComments", true); },
-	'click .close-comments': function(e) { Session.set("showComments", false); },
+	'click .show-comments': function(e) { Router.go(getPath() + "/a") },
+	'click .close-comments': function(e) { Router.go(getPath().replace(/\/a$/, "")); },
 	'click .close-message': function(e) { Session.set("showMessage", false); }
 });
 Template.commentsDialog.events({
