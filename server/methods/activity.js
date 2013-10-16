@@ -41,7 +41,7 @@ Meteor.methods({
 								to: emails,
 								replyTo: from || undefined,
 								subject: from + " mentioned you.",
-								text: from + " mentioned you on the doc app: " + url
+								text: from + " mentioned you on the doc app: \n" + url
 							});
 						}
 					});
