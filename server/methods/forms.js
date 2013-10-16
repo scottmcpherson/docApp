@@ -21,7 +21,7 @@ Meteor.methods({
 			};
 		})
 
-	}
+	},
 	removeForms: function(){
 		Forms.remove({});
 	}
