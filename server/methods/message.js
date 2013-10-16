@@ -17,6 +17,9 @@ Meteor.methods({
 			subject: "You have a new message from " + from,
 			text: options.message 
 		});
+	},
+	removeMessages: function(){
+		Messages.remove({});
 	}
 });
 var contactEmail = function (user) {

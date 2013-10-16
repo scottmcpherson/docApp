@@ -32,6 +32,9 @@ Session.setDefault("active", "");
 // when sub nav link is clicked
 Session.setDefault("subNavActive", false);
 
+// used to position the sub nav after the
+Session.setDefault("leftOrRight", "");
+
 // used for the nav current project dropdown
 Session.setDefault("currentProjectId", "");
 
@@ -86,13 +89,7 @@ Template.layout.helpers({
 	isForms: function() {
 		return Session.equals("active", "forms") ? "" : "hide";
 	},
-	slideLeft: function() {
-		return Session.equals("subNavActive", true) ? "slide-left" : "";
-	},
-	isSubActive: function() {
-		return Session.equals("subNavActive", true) ? "" : "hide";
-	},
-	slideRight: function() {
+	slideRight: function() { // pushes the page right when subnav is opened
       return ((Session.equals("active", "docs") || Session.equals("active", "forms")) && Session.equals("subNavActive", false)) ? "slide-right" : "";
    },
    unreadMessages: function() {
@@ -123,7 +120,6 @@ Template.smartBar.rendered = function() {
 	});
 	$("#example").popover();
 }
-
 
 Template.layout.events({
 	"click .left-nav ul li a": function(e) {
