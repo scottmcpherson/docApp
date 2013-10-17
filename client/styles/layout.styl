@@ -1,22 +1,27 @@
 body
 	background-color: #F5F5F5
 .page-container
-	margin-left 160px
-	// margin-left 220px
-	margin-right 240px
+	position fixed
+	left 160px
+	right 240px
+	z-index 50
 	
 .page-container.right 
-	margin-left: 320px
+	left 320px
 .page-container.left 
-	margin-left 220px
+	left 220px
 .page
 	margin 0 auto
 	max-width 900px
-	margin-top 80px
+	margin-top 40px
 	background-color #fff
 	padding 20px
 	position relative
-
+.page-container.page-projects 
+	top 0
+	bottom 0
+	left 0
+	right 0
 .build-page
 	padding 0// overwrite padding for page
 

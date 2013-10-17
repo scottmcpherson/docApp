@@ -77,6 +77,9 @@ Template.layout.helpers({
 	docIcon: function() {
 		return Session.equals("active", "docs") ? "glyphicon-folder-open active" : "glyphicon-folder-close";
 	},
+	formIcon: function() {
+		return Session.equals("active", "forms") ? "glyphicon-wrench active" : "";
+	},
 	subNavShow: function() {
 		return (Session.equals("active", "docs") || Session.equals("active", "forms")) ? "" : "hide";
 	},
@@ -121,17 +124,54 @@ Template.smartBar.rendered = function() {
 	$("#example").popover();
 }
 Template.layout.rendered = function() {
-	if (amplify.store("layoutPosition") === "right") 
-		$('.sub-nav, .page-container').addClass('right');
+	
+	if (amplify.store("layoutPosition") === "right") {
 
-	if (amplify.store("layoutPosition") === "left")
-		$('.left-nav, .sub-nav, .page-container').addClass("left");
+		$('.sub-nav').transition({left: 100}, 100);
 
-	if (amplify.store("layoutPosition") === "default") 
-		$('.left-nav, .sub-nav, .page-container').removeClass('left');
+		$('.page-container').transition({left: 320}, 100, function() {
+			amplify.store("layoutPosition", "alreadyRight");
+			$('.sub-nav, .page-container').addClass('right');
+		})
+		
+	}
+
+	// if (amplify.store("layoutPosition") === "left") {
+	// 	$('.left-nav').transition({left: -80})
+	// 	$('.sub-nav').transition({left: 0})
+
+	// }
+		
+
+
+	// look at this
+
+	if (amplify.store("layoutPosition") === "default") {
+		$('.sub-nav, .page-container').addClass("right");
+		$('.sub-nav').transition({left: -60}, 100);
+		$('.page-container').transition({left: 160}, 100, function() {
+			$('.sub-nav, .page-container').removeClass("right");
+			amplify.store("layoutPosition", "alreadyDefault");
+
+		})
+	}
 
 	if (amplify.store("active") === "docs" || amplify.store("active") === "forms")
 		Session.set("active", amplify.store("active"));
+
+
+
+	if (amplify.store("layoutPosition") === "alreadyRight") 
+		$('.sub-nav, .page-container').addClass('right');
+
+	if (amplify.store("layoutPosition") === "alreadyLeft")
+		$('.left-nav, .sub-nav, .page-container').addClass("left");
+
+	// if (amplify.store("layoutPosition") === "alreadyDefault") 
+	// 	$('.left-nav, .sub-nav, .page-container').removeClass('left');
+
+	// if (amplify.store("active") === "docs" || amplify.store("active") === "forms")
+	// 	Session.set("active", amplify.store("active"));
 }
 Template.layout.events({
 	"click .left-nav ul li a": function(e) {
@@ -145,8 +185,13 @@ Template.layout.events({
 
 		// else set up the active class and set up info for layout rendered
 		} else {
+
+			// if clicked is "docs" or "forms"
 			if ( e.currentTarget.id === "docs" || e.currentTarget.id === "forms" ) {
-				amplify.store( "layoutPosition", "right" );
+
+				if (amplify.store("layoutPosition") !== "alreadyRight") 
+					amplify.store( "layoutPosition", "right" );
+				
 			} else {
 				amplify.store("layoutPosition", "");
 				$('.sub-nav, .page-container').removeClass("right");
@@ -163,13 +208,25 @@ Template.layout.events({
 	"click .show-nav" : function(e) {
 
 		if($('.sub-nav').hasClass('right')) {
-			$('.left-nav, .sub-nav, .page-container').removeClass("right");
-			$('.left-nav, .sub-nav, .page-container').addClass("left");
-			amplify.store("layoutPosition", "left");
+			$('.left-nav').transition({left: -100}, 100);
+			$('.page-container').transition({left: 220}, 100);
+			$('.sub-nav').css("zIndex", 30).transition({left: 0}, 100, function() {
+				$('.left-nav, .sub-nav, .page-container').removeClass("right");
+				$('.left-nav, .sub-nav, .page-container').addClass("left");
+				amplify.store("layoutPosition", "alreadyLeft");
+			})
+			
 		} else {
-			$('.left-nav, .sub-nav, .page-container').removeClass("left");
-			$('.left-nav, .sub-nav, .page-container').addClass("right");
-			amplify.store("layoutPosition", "right");
+
+			$('.left-nav').transition({left: 0}, 80);
+			$('.page-container').transition({left: 320}, 100);
+			$('.sub-nav').transition({left: 100}, 100, function() {
+				$('.left-nav, .sub-nav, .page-container').removeClass("left");
+				$('.left-nav, .sub-nav, .page-container').addClass("right");
+				amplify.store("layoutPosition", "alreadyRight");
+			})
+			
+			
 		}
 		
 	},
