@@ -3,18 +3,14 @@
 	.navbar-brand
 		text-shadow none
 		color #37485D 
-// .navbar-center
-// 	position absolute
-// 	width 278px
-// 	margin-left 40%
+
 .left-nav 
 	width 100px
 	position fixed
 	background-color #3375AE
 	bottom 0
 	top 50px
-	transition 1s
-
+	z-index 20
 	ul	
 		list-style: none
 		padding-left 0
@@ -41,10 +37,10 @@
 	position fixed
 	top 50px
 	bottom 0
-	left 100px
+	left -60px
 	background-color #fff
 	width 160px
-	z-index 1
+	z-index 10
 	.nav-buttons
 		padding 10px
 		height 50px
@@ -59,10 +55,11 @@
 			padding 20px 0
 			a
 				display block
-// .main-container > div.left 
-// 	left 0px
+.sub-nav.right
+	left 100px
+.sub-nav.left
+	left 0
+.left-nav.left 
+	left -100px
 .nav > li > a:hover, .nav > li > a:focus
 	background-color transparent
-div.slide-left
-	transition 1s
-	left 0

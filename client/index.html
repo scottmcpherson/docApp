@@ -34,7 +34,7 @@
 	
 	<div class="main-container">
 
-		<nav class="left-nav {{slideLeft}} right">
+		<nav class="left-nav">
 			<ul>
 				<li><a href="{{pathFor 'projects'}}" id="home"><span class="glyphicon glyphicon-home"></span><br>Home</a></li>
 				<li><a href="#" id="docs"><span class="glyphicon {{ docIcon }}"></span><br>Docs</a></li>
@@ -45,7 +45,7 @@
 			</ul>
 		</nav>
 
-		<div class="sub-nav {{subNavShow}} {{slideLeft}}">
+		<div class="sub-nav">
 			<div class="nav-buttons clearfix">
 				<button type="button" class="show-nav btn btn-default btn-sm pull-left">Nav</button>
 				<button type="button" class="add-form btn btn-default btn-sm pull-right {{ isForms }}">
@@ -65,7 +65,7 @@
 
 		</div>
 		
-		<div class="page-container {{slideRight}}">	
+		<div class="page-container">	
 			{{yield}}
 		</div>
 
