@@ -120,41 +120,58 @@ Template.smartBar.rendered = function() {
 	});
 	$("#example").popover();
 }
+Template.layout.rendered = function() {
+	if (amplify.store("layoutPosition") === "right") 
+		$('.sub-nav, .page-container').addClass('right');
 
+	if (amplify.store("layoutPosition") === "left")
+		$('.left-nav, .sub-nav, .page-container').addClass("left");
+
+	if (amplify.store("layoutPosition") === "default") 
+		$('.left-nav, .sub-nav, .page-container').removeClass('left');
+
+	if (amplify.store("active") === "docs" || amplify.store("active") === "forms")
+		Session.set("active", amplify.store("active"));
+}
 Template.layout.events({
 	"click .left-nav ul li a": function(e) {
 		
-		// For Nav Active Session
-		
+		// if the link that was clicked on was active, remove active
+		// and set the up info for layout rendered
 		if ($(e.currentTarget).children("span").hasClass("active")) {
+			amplify.store("active", "");
 			Session.set("active", "");
+			amplify.store("layoutPosition", "default");
+
+		// else set up the active class and set up info for layout rendered
 		} else {
-			Session.set("active", e.currentTarget.id);
+			if ( e.currentTarget.id === "docs" || e.currentTarget.id === "forms" ) {
+				amplify.store( "layoutPosition", "right" );
+			} else {
+				amplify.store("layoutPosition", "");
+				$('.sub-nav, .page-container').removeClass("right");
+			}
+
+			Session.set( "active", e.currentTarget.id );
+			amplify.store( "active", e.currentTarget.id );
+			
 		}
+		
 	
 		
 	},
-	"click .sub-nav ul li a": function(e) {
-
-		// Session.set("subNavActive", true);
-			
-	},
 	"click .show-nav" : function(e) {
 
-		if(! $('.sub-nav').hasClass('left')) {
-			$('.left-nav').transition({x: -50}, 400);
-			$('.sub-nav').transition({x: -100}, 300, function() {
-				$(this).addClass('left');
-			});
-			$('.page-container').transition({x: -50}, 300);
+		if($('.sub-nav').hasClass('right')) {
+			$('.left-nav, .sub-nav, .page-container').removeClass("right");
+			$('.left-nav, .sub-nav, .page-container').addClass("left");
+			amplify.store("layoutPosition", "left");
 		} else {
-			$('.sub-nav').transition({x: 0}, 300, function() {
-				$(this).removeClass('left');
-			});
-			$('.left-nav').transition({x: 0}, 300);
-			$('.page-container').transition({x: 0}, 300);
+			$('.left-nav, .sub-nav, .page-container').removeClass("left");
+			$('.left-nav, .sub-nav, .page-container').addClass("right");
+			amplify.store("layoutPosition", "right");
 		}
-		// Session.set("subNavActive", false);
+		
 	},
 	"click .add-form" : function(e) {
 		// e.preventDefault();
