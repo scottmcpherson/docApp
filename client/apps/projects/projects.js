@@ -19,9 +19,6 @@ Template.projects.events({
 				$(e.target).trigger('click');
 			});
 		});
-		// $(".projects-container").fadeOut(400, "easeOutCubic", function(){
-		// 	$(e.target).trigger('click');
-		// })
 		
 	}
 });
@@ -33,3 +30,6 @@ Template.signIn.events({
 		Meteor.loginWithPassword(email, password);
 	}
 });
+Template.projects.rendered = function() {
+	$('.page-container').addClass("page-projects");
+}
