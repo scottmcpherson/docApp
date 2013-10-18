@@ -1,9 +1,11 @@
 <template name="users">
 	<div class="page">
 		<h1>Users</h1>
-		{{#each projectUsers}}
-			{{>user}}		
-		{{/each}}
+		<ul class="list-unstyled list-users">
+			{{#each projectUsers}}
+				{{>user}}		
+			{{/each}}
+		</ul>
 		<hr>
 		<h3>Add Users to this Project</h3>
 		<ul class="list-unstyled add-users">			
@@ -15,8 +17,18 @@
 </template>
 
 <template name="user">
-	<p>{{getEmail this}}</p>
-	
+	<li class="clearfix">
+		<div class="media">
+			<img src="/images/{{profile.username}}.jpg" alt="" class="media-object pull-left" width="50" height="50">
+			<div class="media-body">
+				<p><b>Name  </b>{{profile.fullName}}</p>
+				<p><b>email  </b>{{getEmail this}}</p>
+				<a href="{{_id}}" class="btn btn-primary pull-right btn-sm editUser">Edit</a>
+			</div>
+		</div>
+		
+		
+	</li>
 </template>
 
 <template name="nonUser">

@@ -78,7 +78,7 @@ Template.layout.helpers({
 		return Session.equals("active", "docs") ? "glyphicon-folder-open active" : "glyphicon-folder-close";
 	},
 	formIcon: function() {
-		return Session.equals("active", "forms") ? "glyphicon-wrench active" : "";
+		return Session.equals("active", "forms") ? "glyphicon-wrench wrench active" : "";
 	},
 	subNavShow: function() {
 		return (Session.equals("active", "docs") || Session.equals("active", "forms")) ? "" : "hide";

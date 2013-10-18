@@ -12,4 +12,10 @@ Template.nonUser.events({
 			projectId: projectId
 		});
 	}
-})
+});
+Template.user.events({
+	'click .editUser': function(e, template) {
+		console.log(template);
+
+	}
+});	
